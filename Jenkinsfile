@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage ('Build'){
             steps{
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
             post{
                 success{
@@ -21,7 +21,7 @@ pipeline{
                     readProp = readProperties file: 'build.properties'
                 }
                 echo "This is running on ${readProp['deploy.type']}"
-                deploy adapters: [tomcat7(credentialsId: '58cccd86-7ec3-4a1a-8dfd-8f664aff0392', path: '', url: 'http://52.66.198.184:8282/')], contextPath: null, war: "**/${readProp['deploy.app.name']}.war"
+                deploy adapters: [tomcat7(credentialsId: '5bea2314-3501-468e-9de4-ea20723c0d68', path: '', url: 'http://localhost:8181/')], contextPath: null, war: '**/*.war'
             }
         }
     }
